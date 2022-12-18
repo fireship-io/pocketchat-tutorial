@@ -3,8 +3,8 @@
   import { currentUser, pb } from './pocketbase';
 
   let newMessage: string;
-  let messages: any[] = [];
-  let unsubscribe: any;
+  let messages = [];
+  let unsubscribe: () => void;
 
   onMount(async () => {
     // Get initial messages
@@ -55,7 +55,7 @@
         width="40px"
       />
       <div>
-        <small class="sent-by">
+        <small>
           Sent by @{message.expand?.user?.username}
         </small>
         <p class="msg-text">{message.text}</p>
@@ -66,5 +66,7 @@
 
 <form on:submit|preventDefault={sendMessage}>
   <input placeholder="Message" type="text" bind:value={newMessage} />
-  <button type="submit"> Send </button>
+  <button type="submit">Send</button>
 </form>
+
+
